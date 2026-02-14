@@ -4,26 +4,38 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Every Day.</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Dancing+Script:wght@500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;600&family=Dancing+Script:wght@500&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg: #0a0a0a;
+            --bg-gradient: linear-gradient(180deg, #050505 0%, #0a0a12 100%);
             --text-main: #e0e0e0;
-            --text-dim: #888888;
+            --text-dim: #777777;
             --accent: #ffffff;
+            --heart-color: #ff4b4b;
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
 
         body {
             font-family: 'Inter', sans-serif;
-            background-color: var(--bg);
+            background: var(--bg-gradient);
             color: var(--text-main);
             height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
             overflow: hidden;
+        }
+
+        /* Subtle Texture Overlay */
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: url('https://grainy-gradients.vercel.app/noise.svg');
+            opacity: 0.05;
+            pointer-events: none;
+            z-index: 1;
         }
 
         section {
@@ -35,51 +47,68 @@
             align-items: center;
             padding: 20px;
             text-align: center;
-            transition: opacity 1.5s ease;
+            transition: opacity 2s ease;
             opacity: 0;
             pointer-events: none;
+            z-index: 2;
         }
 
         .active { opacity: 1; pointer-events: all; }
 
         /* Typography */
-        h1, h2 { font-weight: 300; letter-spacing: 2px; line-height: 1.6; }
-        .romantic { font-family: 'Dancing Script', cursive; font-size: 2.5rem; color: var(--text-main); }
-        .dim { color: var(--text-dim); font-size: 1.1rem; margin-bottom: 10px; }
+        h1, h2 { font-weight: 200; letter-spacing: 3px; line-height: 1.6; }
+        .romantic { font-family: 'Dancing Script', cursive; font-size: 3rem; color: var(--accent); }
+        .dim { color: var(--text-dim); font-size: 1rem; margin-bottom: 12px; font-weight: 300; }
 
-        /* Buttons */
+        /* Minimalist Buttons */
         .btn {
-            margin-top: 30px;
+            margin-top: 40px;
             background: none;
-            border: 1px solid var(--text-dim);
-            color: var(--text-main);
-            padding: 12px 40px;
-            font-size: 0.9rem;
-            letter-spacing: 2px;
+            border: 1px solid #333;
+            color: var(--text-dim);
+            padding: 10px 30px;
+            font-size: 0.8rem;
+            letter-spacing: 3px;
             cursor: pointer;
-            transition: all 0.4s;
-            border-radius: 2px;
+            transition: all 0.6s ease;
+            border-radius: 1px;
+            text-transform: uppercase;
         }
 
         .btn:hover {
             border-color: var(--accent);
-            background: var(--accent);
-            color: var(--bg);
+            color: var(--accent);
         }
 
-        /* Counter */
+        /* Counter Styles */
         .counter-container {
             display: flex;
-            gap: 30px;
-            margin: 40px 0;
+            gap: 40px;
+            margin: 50px 0;
         }
 
-        .unit { font-size: 0.8rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1px; }
-        .val { font-size: 2.5rem; display: block; color: var(--accent); font-weight: 400; }
+        .unit { font-size: 0.7rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 2px; }
+        .val { font-size: 3.5rem; display: block; color: var(--accent); font-weight: 200; }
 
-        /* Fade-in Animation Classes */
-        .fade-text { animation: softFade 3s forwards; opacity: 0; }
-        @keyframes softFade { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        /* Floating Hearts Animation */
+        .heart {
+            position: fixed;
+            bottom: -10vh;
+            color: var(--heart-color);
+            font-size: 20px;
+            user-select: none;
+            pointer-events: none;
+            z-index: 0;
+            animation: floatUp 5s linear forwards;
+        }
+
+        @keyframes floatUp {
+            0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(-110vh) rotate(360deg); opacity: 0; }
+        }
+
+        .fade-text { animation: softFade 4s forwards; opacity: 0; }
+        @keyframes softFade { from { opacity: 0; } to { opacity: 1; } }
     </style>
 </head>
 <body>
@@ -89,11 +118,11 @@
         <p class="dim fade-text" style="animation-delay: 2s;">Not just when it’s easy.</p>
         <p class="dim fade-text" style="animation-delay: 3.5s;">Not just when we’re happy.</p>
         <h1 class="fade-text" style="animation-delay: 5.5s; margin-top: 20px;">Every day.</h1>
-        <button class="btn fade-text" style="animation-delay: 7s;" onclick="next(2)">CONTINUE</button>
+        <button class="btn fade-text" style="animation-delay: 7s;" onclick="next(2)">Continue</button>
     </section>
 
     <section id="step2">
-        <h2 class="dim">I’ve loved you for…</h2>
+        <h2 class="dim">Ya rouhy, I’ve loved you for…</h2>
         <div class="counter-container">
             <div><span id="days" class="val">0</span><span class="unit">Days</span></div>
             <div><span id="hours" class="val">0</span><span class="unit">Hours</span></div>
@@ -101,21 +130,21 @@
             <div><span id="secs" class="val">0</span><span class="unit">Secs</span></div>
         </div>
         <p class="dim" style="max-width: 400px; font-style: italic;">And not a single second did I regret choosing you.</p>
-        <button class="btn" onclick="next(3)">NEXT</button>
+        <button class="btn" onclick="next(3)">Next</button>
     </section>
 
     <section id="step3">
         <p class="dim">So tell me…</p>
-        <h2 style="font-size: 2rem; margin-bottom: 20px;">Can I keep choosing you?</h2>
+        <h2 style="font-size: 2rem; margin-bottom: 20px; font-weight: 300;">Can I keep you forever?</h2>
         <div style="display: flex; gap: 20px;">
-            <button class="btn" onclick="next(4)">YES</button>
-            <button class="btn" onclick="next(4)">ALWAYS</button>
+            <button class="btn" onclick="next(4)">Yes</button>
+            <button class="btn" onclick="next(4)">Yes Always!!</button>
         </div>
     </section>
 
     <section id="step4">
         <h1 class="romantic">You’re stuck with me now ❤️</h1>
-        <p class="dim" style="margin-top: 20px;">Forever & Always ♾️</p>
+        <p class="dim" style="margin-top: 20px; letter-spacing: 5px;">FOREVER & ALWAYS ♾️</p>
     </section>
 
     <script>
@@ -136,8 +165,30 @@
         updateCounter();
 
         function next(step) {
-            document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
-            document.getElementById('step' + step).classList.add('active');
+            document.querySelectorAll('section').forEach(s => {
+                s.classList.remove('active');
+            });
+            
+            setTimeout(() => {
+                const nextStep = document.getElementById('step' + step);
+                nextStep.classList.add('active');
+                if(step === 4) spawnHearts();
+            }, 100);
+        }
+
+        function spawnHearts() {
+            setInterval(() => {
+                const heart = document.createElement('div');
+                heart.classList.add('heart');
+                heart.innerHTML = '❤️';
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.fontSize = (Math.random() * 15 + 10) + 'px';
+                heart.style.animationDuration = (Math.random() * 3 + 3) + 's';
+                heart.style.opacity = Math.random() * 0.5 + 0.3;
+                document.body.appendChild(heart);
+                
+                setTimeout(() => heart.remove(), 5000);
+            }, 400);
         }
     </script>
 </body>
