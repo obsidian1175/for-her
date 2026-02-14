@@ -3,136 +3,123 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Forever With You</title>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+    <title>Every Day.</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Dancing+Script:wght@500&display=swap" rel="stylesheet">
     <style>
         :root {
-            --sunset-pink: #ffafbd;
-            --sunset-orange: #ffc3a0;
-            --text-color: #4a4a4a;
-            --accent-pink: #ff4bb4;
+            --bg: #0a0a0a;
+            --text-main: #e0e0e0;
+            --text-dim: #888888;
+            --accent: #ffffff;
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
 
         body {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            background: linear-gradient(135deg, var(--sunset-pink), var(--sunset-orange));
-            color: var(--text-color);
-            overflow-x: hidden;
-            text-align: center;
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg);
+            color: var(--text-main);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
         }
 
         section {
-            min-height: 100vh;
+            position: absolute;
+            width: 100%;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             padding: 20px;
-            transition: opacity 1s ease-in-out;
-        }
-
-        .hidden { display: none; opacity: 0; }
-
-        /* Step 1 Styles */
-        h1, .romantic-text {
-            font-family: 'Dancing Script', cursive;
-            font-size: 3rem;
-            margin-bottom: 20px;
-        }
-
-        .btn {
-            padding: 15px 35px;
-            background: white;
-            color: var(--accent-pink);
-            border: none;
-            border-radius: 50px;
-            font-weight: bold;
-            cursor: pointer;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            transition: transform 0.3s;
-        }
-
-        .btn:hover { transform: scale(1.1); }
-
-        /* Step 2 Styles (Counter) */
-        .counter-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 20px;
-            margin: 30px 0;
-        }
-
-        .counter-item {
-            background: rgba(255, 255, 255, 0.2);
-            padding: 15px;
-            border-radius: 12px;
-            width: 120px;
-        }
-
-        .counter-number { font-size: 2rem; font-weight: bold; }
-
-        /* Step 3 Styles */
-        .question-box {
-            background: white;
-            padding: 40px;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-        }
-
-        .btn-group { display: flex; gap: 15px; margin-top: 20px; }
-
-        /* Final Magic */
-        .floating-hearts {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
+            text-align: center;
+            transition: opacity 1.5s ease;
+            opacity: 0;
             pointer-events: none;
-            z-index: -1;
         }
+
+        .active { opacity: 1; pointer-events: all; }
+
+        /* Typography */
+        h1, h2 { font-weight: 300; letter-spacing: 2px; line-height: 1.6; }
+        .romantic { font-family: 'Dancing Script', cursive; font-size: 2.5rem; color: var(--text-main); }
+        .dim { color: var(--text-dim); font-size: 1.1rem; margin-bottom: 10px; }
+
+        /* Buttons */
+        .btn {
+            margin-top: 30px;
+            background: none;
+            border: 1px solid var(--text-dim);
+            color: var(--text-main);
+            padding: 12px 40px;
+            font-size: 0.9rem;
+            letter-spacing: 2px;
+            cursor: pointer;
+            transition: all 0.4s;
+            border-radius: 2px;
+        }
+
+        .btn:hover {
+            border-color: var(--accent);
+            background: var(--accent);
+            color: var(--bg);
+        }
+
+        /* Counter */
+        .counter-container {
+            display: flex;
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        .unit { font-size: 0.8rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1px; }
+        .val { font-size: 2.5rem; display: block; color: var(--accent); font-weight: 400; }
+
+        /* Fade-in Animation Classes */
+        .fade-text { animation: softFade 3s forwards; opacity: 0; }
+        @keyframes softFade { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
 <body>
 
-    <section id="step1">
-        <h1 class="fade-in">Hey my love…</h1>
-        <p class="romantic-text">I have something to ask you.</p>
-        <button class="btn" onclick="showStep(2)">💌 Open it</button>
+    <section id="step1" class="active">
+        <p class="dim fade-text" style="animation-delay: 0.5s;">Not just one day.</p>
+        <p class="dim fade-text" style="animation-delay: 2s;">Not just when it’s easy.</p>
+        <p class="dim fade-text" style="animation-delay: 3.5s;">Not just when we’re happy.</p>
+        <h1 class="fade-text" style="animation-delay: 5.5s; margin-top: 20px;">Every day.</h1>
+        <button class="btn fade-text" style="animation-delay: 7s;" onclick="next(2)">CONTINUE</button>
     </section>
 
-    <section id="step2" class="hidden">
-        <h2 class="romantic-text">I’ve loved you for…</h2>
-        <div class="counter-grid">
-            <div class="counter-item"><div id="days" class="counter-number">0</div>days</div>
-            <div class="counter-item"><div id="hours" class="counter-number">0</div>hours</div>
-            <div class="counter-item"><div id="minutes" class="counter-number">0</div>mins</div>
-            <div class="counter-item"><div id="seconds" class="counter-number">0</div>secs</div>
+    <section id="step2">
+        <h2 class="dim">I’ve loved you for…</h2>
+        <div class="counter-container">
+            <div><span id="days" class="val">0</span><span class="unit">Days</span></div>
+            <div><span id="hours" class="val">0</span><span class="unit">Hours</span></div>
+            <div><span id="mins" class="val">0</span><span class="unit">Mins</span></div>
+            <div><span id="secs" class="val">0</span><span class="unit">Secs</span></div>
         </div>
-        <p>And not a single second did I regret choosing you.</p>
-        <button class="btn" style="margin-top: 40px;" onclick="showStep(3)">Next ❤️</button>
+        <p class="dim" style="max-width: 400px; font-style: italic;">And not a single second did I regret choosing you.</p>
+        <button class="btn" onclick="next(3)">NEXT</button>
     </section>
 
-    <section id="step3" class="hidden">
-        <div class="question-box">
-            <h2 class="romantic-text">So tell me…</h2>
-            <p style="font-size: 1.5rem;">Can I keep you forever?</p>
-            <div class="btn-group">
-                <button class="btn" onclick="showStep(4)">💗 Yes</button>
-                <button class="btn" onclick="showStep(4)">💗 Yes forever</button>
-            </div>
+    <section id="step3">
+        <p class="dim">So tell me…</p>
+        <h2 style="font-size: 2rem; margin-bottom: 20px;">Can I keep choosing you?</h2>
+        <div style="display: flex; gap: 20px;">
+            <button class="btn" onclick="next(4)">YES</button>
+            <button class="btn" onclick="next(4)">ALWAYS</button>
         </div>
     </section>
 
-    <section id="step4" class="hidden">
-        <h1 class="romantic-text">You’re stuck with me now ❤️</h1>
-        <p>I don’t love you for one special day.</p>
-        <p>I choose you every single day.</p>
-        <h2 class="romantic-text" style="margin-top: 30px;">Forever & Always ♾️</h2>
-        <div class="floating-hearts" id="heart-container"></div>
+    <section id="step4">
+        <h1 class="romantic">You’re stuck with me now ❤️</h1>
+        <p class="dim" style="margin-top: 20px;">Forever & Always ♾️</p>
     </section>
 
     <script>
-        // Set the date we've been together (17 Mars 2025)
+        // Start date: March 17, 2025
         const startDate = new Date("March 17, 2025 00:00:00").getTime();
 
         function updateCounter() {
@@ -141,47 +128,16 @@
 
             document.getElementById("days").innerText = Math.floor(diff / (1000 * 60 * 60 * 24));
             document.getElementById("hours").innerText = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            document.getElementById("minutes").innerText = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-            document.getElementById("seconds").innerText = Math.floor((diff % (1000 * 60)) / 1000);
+            document.getElementById("mins").innerText = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            document.getElementById("secs").innerText = Math.floor((diff % (1000 * 60)) / 1000);
         }
 
         setInterval(updateCounter, 1000);
+        updateCounter();
 
-        function showStep(stepNum) {
-            // Hide all sections
-            document.querySelectorAll('section').forEach(s => {
-                s.style.opacity = '0';
-                setTimeout(() => s.classList.add('hidden'), 500);
-            });
-
-            // Show selected section
-            setTimeout(() => {
-                const nextSection = document.getElementById('step' + stepNum);
-                nextSection.classList.remove('hidden');
-                setTimeout(() => nextSection.style.opacity = '1', 50);
-                if(stepNum === 4) startHearts();
-            }, 600);
-        }
-
-        function startHearts() {
-            const container = document.getElementById('heart-container');
-            setInterval(() => {
-                const heart = document.createElement('div');
-                heart.innerHTML = '❤️';
-                heart.style.position = 'fixed';
-                heart.style.left = Math.random() * 100 + 'vw';
-                heart.style.top = '100vh';
-                heart.style.fontSize = (Math.random() * 20 + 10) + 'px';
-                heart.style.transition = 'all 4s linear';
-                container.appendChild(heart);
-
-                setTimeout(() => {
-                    heart.style.top = '-10vh';
-                    heart.style.opacity = '0';
-                }, 100);
-
-                setTimeout(() => heart.remove(), 4000);
-            }, 300);
+        function next(step) {
+            document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
+            document.getElementById('step' + step).classList.add('active');
         }
     </script>
 </body>
